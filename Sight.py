@@ -44,4 +44,4 @@ for i in pixels:
 img.save("out"+sys.argv[1], "JPEG");
 
 print("Bounds: X: ", minx, " -> ", maxx, "; Y:", miny, " -> ", maxy, ";"); 
-print("Centering: ", ((((maxx - minx)/2)+minx)/im.size[1]) * 360 - 180);
+print("Centering: ", ((((maxx - minx)/2)+minx)/im.size[0]) * 360 - 180);
