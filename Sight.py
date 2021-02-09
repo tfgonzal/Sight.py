@@ -22,7 +22,7 @@ for i in pixels:
     else:
         x = x + 1;
         
-    if (i[0] >= i[1] + i[2] and i[0] > 100 and i[1] + i[2] < 100 and i[1] < 20):
+    if (i[0] >= i[1] + i[2] and i[0] > 100 and i[1] + i[2] < 150 and i[1] < i[2]):
         pixels2[x, y] = (255, 255, 0);
         if (minx == 0 and x > 0):
             minx = x;
