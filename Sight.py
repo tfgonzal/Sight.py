@@ -15,6 +15,24 @@ def point_draw(x, y, pixel, color):
     pixel[x+2, y] = color;
     pixel[x+1, y-1] = color;
     pixel[x-1, y+1] = color;
+    
+def box_draw(x1, x2, y1, y2, pixel, color):
+    x = x1;
+    for y in range(y1, y2):
+        pixel[x, y] = color;
+        
+    x = x2;
+    for y in range(y1, y2):
+        pixel[x, y] = color;
+        
+    y = y1;
+    for x in range(x1, x2):
+        pixel[x, y] = color;
+
+    y = y2;
+    for x in range(x1, x2):
+        pixel[x, y] = color;
+    
 
 im = Image.open(sys.argv[1], 'r')
 pixels = list(im.getdata())
@@ -62,27 +80,31 @@ for i in pixels:
     
     j = j + 1;
 
-x = maxx;
-for y in range(miny, maxy):
-    pixels2[x, y] = (0, 255, 0);
-    
-x = minx;
-for y in range(miny, maxy):
-    pixels2[x, y] = (0, 255, 0);
-    
-y = maxy;
-for x in range(minx, maxx):
-    pixels2[x, y] = (0, 255, 0);
 
-y = miny;
-for x in range(minx, maxx):
-    pixels2[x, y] = (0, 255, 0);
+box_draw(minx, maxx, miny, maxy, pixels2, (0, 0, 255))
     
 meanx = meanx / count;
 meany = meany / count;
 
-round(meanx);
-round(meany);
+meanx = round(meanx);
+meany = round(meany);
+
+lminx = minx;
+lmaxx = maxx;
+lminy = miny;
+lmaxy = maxy;
+
+if (meanx - minx > maxx - meanx):
+    lminx = meanx - (maxx - meanx)
+else:
+    lmaxx = meanx + (meanx - minx)
+
+if (meany - miny > maxy - meany):
+    lminy = meany - (maxy - meany)
+else:
+    lmaxy = meany + (meany - miny)
+    
+box_draw(lminx, lmaxx, lminy, lmaxy, pixels2, (0, 255, 0))
 
 point_draw(meanx, meany, pixels2, (0, 255, 0));
 
