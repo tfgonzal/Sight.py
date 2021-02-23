@@ -1,6 +1,5 @@
 # Author: Teofilo Gonzalez
-# Usage:    
-# python3 Sight.py test.jpg
+# Usage: python3 Sight.py test.jpg
 # Output: outtest.jpg
 # Green Dot: Mean of all red pixels
 # Blue Dot: Mid point of both X and Y coordinates
