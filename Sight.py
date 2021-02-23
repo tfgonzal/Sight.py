@@ -1,3 +1,11 @@
+# Author: Teofilo Gonzalez
+# Usage:    
+# python3 Sight.py test.jpg
+# Output: outtest.jpg
+# Green Dot: Mean of all red pixels
+# Blue Dot: Mid point of both X and Y coordinates
+# Blue Square: Box around the max and min of X and Y coordinates
+
 from PIL import Image
 import math
 import numpy as np
@@ -43,10 +51,6 @@ print(im.size);
 img = Image.new( 'RGB', (im.size[0]+1, im.size[1]+1), "black")
 pixels2 = img.load()
 
-
-listx = [];
-listy = [];
-
 x = 0;
 y = 0;
 j = 0;
@@ -68,8 +72,8 @@ for i in pixels:
         count = count + 1;
         meanx = meanx + x;
         meany = meany + y;
-        listx.append(x);
-        listy.append(y);
+        #listx.append(x);
+        #listy.append(y);
         pixels2[x, y] = (255, 255, 0);
         if (minx == 0 and x > 0):
             minx = x;
@@ -94,39 +98,39 @@ box_draw(minx, maxx, miny, maxy, pixels2, (0, 0, 255))
 meanx = meanx / count;
 meany = meany / count;
 
-sdx = 0;
-sdy = 0;
+#sdx = 0;
+#sdy = 0;
 
-for i in listx:
-    sdx = sdx + (listx[i]-meanx)*(listx[i]-meanx);
-    sdy = sdy + (listy[i]-meany)*(listy[i]-meany);
+#for i in listx:
+#    sdx = sdx + (listx[i]-meanx)*(listx[i]-meanx);
+#    sdy = sdy + (listy[i]-meany)*(listy[i]-meany);
     
-sdx = sdx / count;
-sdy = sdy / count;
+#sdx = sdx / count;
+#sdy = sdy / count;
 
-sdx = math.sqrt(sdx);
-sdy = math.sqrt(sdy);
+#sdx = math.sqrt(sdx);
+#sdy = math.sqrt(sdy);
 
-sdx = round(sdx);
-sdy = round(sdy);
+#sdx = round(sdx);
+#sdy = round(sdy);
 
 meanx = round(meanx);
 meany = round(meany);
 
-lminx = meanx - 3*sdx;
-lmaxx = meanx + 3*sdx;
-lminy = meany - 3*sdy;
-lmaxy = meany + 3*sdy;
-if(lminx < 0):
-    lminx = 0;
-if(lminy < 0):
-    lminy = 0;
-if(lmaxx > im.size[0]):
-    lmaxx = im.size[0];
-if(lmaxy > im.size[1]):
-    lmaxy = im.size[1];
+#lminx = meanx - 3*sdx;
+#lmaxx = meanx + 3*sdx;
+#lminy = meany - 3*sdy;
+#lmaxy = meany + 3*sdy;
+#if(lminx < 0):
+#    lminx = 0;
+#if(lminy < 0):
+#    lminy = 0;
+#if(lmaxx > im.size[0]):
+#    lmaxx = im.size[0];
+#if(lmaxy > im.size[1]):
+#    lmaxy = im.size[1];
     
-box_draw(lminx, lmaxx, lminy, lmaxy, pixels2, (0, 255, 0))
+#box_draw(lminx, lmaxx, lminy, lmaxy, pixels2, (0, 255, 0))
 
 point_draw(meanx, meany, pixels2, (0, 255, 0));
 
